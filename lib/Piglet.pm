@@ -74,16 +74,6 @@ However Mojolicious and Dancer are also featureful, which is obviously
 a great thing later, but we wanted something as thin, or in other
 words, as I<dumb> as possible, to start writing a new application.
 
-For instance, Mojolicious and Dancer both implement adapters for
-features like session management, template engines (renderers) and
-loggers. Piglet won't implement them, but provides a helper utility to
-delegate to the equivalent Plack::Middleware components.
-
-Also the new micro frameworks tend to go masohistic on as dependencies
-free as possible. Piglet wouldn't limit itself with that requirement
-while we try to keep the dependencies as lite, minimal and pure perl
-as possible.
-
 So, Piglet is basically a toolkit to write a framework-less
 application, or your I<own micro web framework> for an application
 with more raw-ish access to Plack middleware components with simple OO
