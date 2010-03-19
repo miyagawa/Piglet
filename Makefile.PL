@@ -1,0 +1,11 @@
+use inc::Module::Install;
+all_from 'lib/Piglet.pm';
+readme_from('lib/Piglet.pm');
+requires 'Plack', 0.99;
+requires 'Router::Simple';
+requires 'Data::Section::Simple';
+requires 'Sub::Exporter';
+build_requires 'Test::More', 0.88;
+test_requires 'Test::Requires';
+auto_set_repository();
+WriteAll;

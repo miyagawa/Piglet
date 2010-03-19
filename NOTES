@@ -1,0 +1,4 @@
+Should match with unescaped paths i.e. /wiki/%.....
+Delete is ugly: support any [ 'delete' ] or use 'del'
+get '' will automatically produce HEAD handler
+but HEAD should be body-less
