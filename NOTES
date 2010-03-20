@@ -2,3 +2,4 @@ Should match with unescaped paths i.e. /wiki/%.....
 Delete is ugly: support any [ 'delete' ] or use 'del'
 get '' will automatically produce HEAD handler
 but HEAD should be body-less
+Serializers http://lumberjaph.net/blog/index.php/2010/03/19/easily-create-rest-interface-with-the-dancer-1170/
