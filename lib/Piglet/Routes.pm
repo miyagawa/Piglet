@@ -1,5 +1,6 @@
 package Piglet::Routes;
 use strict;
+use Carp ();
 use Encode ();
 use Router::Simple;
 use Plack::Util::Accessor qw(encoding);
@@ -27,7 +28,7 @@ sub match {
             $env->{SCRIPT_NAME} .= $1;
             $env->{PATH_INFO}    = $2 . $m->{path_info};
         } else {
-            # Hmm what should it do?
+            Carp::carp("Path '$env->{PATH_INFO}' does not end with path_info: '$m->{path_info}'");
         }
     }
 
