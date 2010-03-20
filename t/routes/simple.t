@@ -13,6 +13,7 @@ my $r = Piglet::Routes->new;
 $r->connect("/users/list", { controller => "Users", action => "list" });
 $r->connect("/{user:[a-z0-9_]+}", { controller => "Profile" });
 $r->connect("/admin/{path_info:.*}", { app => "Admin" });
+$r->connect("/wiki/{page}", { controller => "Wiki" });
 
 {
     my $m = $r->match( env "/users/list" );
@@ -42,6 +43,13 @@ $r->connect("/admin/{path_info:.*}", { app => "Admin" });
     is_deeply $m, { app => "Admin", path_info => "0" };
     is $env->{SCRIPT_NAME}, '/admin';
     is $env->{PATH_INFO}, '/0';
+}
+
+{
+    my $env = env "/wiki/%E3%83%A1%E3%82%A4%E3%83%B3";
+
+    my $m = $r->match($env);
+    is_deeply $m, { controller => "Wiki", page => "メイン" };
 }
 
 done_testing;
