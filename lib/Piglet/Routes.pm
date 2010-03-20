@@ -16,7 +16,7 @@ sub match {
 
     # magic path_info
     if ($m->{path_info}) {
-        if ($env->{PATH_INFO} =~ s!(.*?)(/?)\Q$m->{path_info}\E$!!) {
+        if ($env->{PATH_INFO} =~ s!^(.*?)(/?)\Q$m->{path_info}\E$!!) {
             $m->{path_info}      = $2 . $m->{path_info};
             $env->{SCRIPT_NAME} .= $1;
             $env->{PATH_INFO}    = $m->{path_info};
