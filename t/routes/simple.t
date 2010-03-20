@@ -35,5 +35,14 @@ $r->connect("/admin/{path_info:.*}", { app => "Admin" });
     is $env->{PATH_INFO}, '/login/me';
 }
 
+{
+    my $env = env "/admin/0";
+
+    my $m = $r->match($env);
+    is_deeply $m, { app => "Admin", path_info => "/0" };
+    is $env->{SCRIPT_NAME}, '/admin';
+    is $env->{PATH_INFO}, '/0';
+}
+
 done_testing;
 

@@ -15,7 +15,7 @@ sub match {
     my $m = $self->{rs}->match($env) or return;
 
     # magic path_info
-    if ($m->{path_info}) {
+    if (exists $m->{path_info}) {
         if ($env->{PATH_INFO} =~ s!^(.*?)(/?)\Q$m->{path_info}\E$!!) {
             $m->{path_info}      = $2 . $m->{path_info};
             $env->{SCRIPT_NAME} .= $1;
