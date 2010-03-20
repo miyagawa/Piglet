@@ -1,6 +1,7 @@
 use strict;
 use Piglet::Routes;
 use Test::More;
+use utf8;
 
 use HTTP::Message::PSGI;
 use HTTP::Request::Common;

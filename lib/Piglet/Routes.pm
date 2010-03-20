@@ -1,13 +1,20 @@
 package Piglet::Routes;
 use strict;
+use Encode ();
 use Router::Simple;
+use Plack::Util::Accessor qw(encoding);
 
 sub new {
     my $class = shift;
-    bless { rs => Router::Simple->new }, $class;
+    bless {
+        rs => Router::Simple->new,
+        encoding => "utf-8",
+        @_,
+    }, $class;
 }
 
-sub connect { shift->{rs}->connect(@_) }
+sub connect   { shift->{rs}->connect(@_) }
+sub submapper { shift->{rs}->submapper(@_) }
 
 sub match {
     my($self, $env) = @_;
@@ -21,6 +28,14 @@ sub match {
             $env->{PATH_INFO}    = $2 . $m->{path_info};
         } else {
             # Hmm what should it do?
+        }
+    }
+
+    if ($self->{encoding}) {
+        for my $k (keys %$m) {
+            if ($m->{$k} =~ /[^[:ascii:]]/) {
+                $m->{$k} = Encode::decode($self->{encoding}, $m->{$k});
+            }
         }
     }
 
