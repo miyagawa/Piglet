@@ -18,6 +18,19 @@ sub new {
 sub connect   { shift->{rs}->connect(@_) }
 sub submapper { shift->{rs}->submapper(@_) }
 
+sub get  { $_[0]->connect($_[1], $_[2], { method => [ 'GET', 'HEAD' ] }) }
+sub post { $_[0]->connect($_[1], $_[2], { method => [ 'POST' ] }) }
+
+sub any  {
+    my $self = shift;
+    my $method = ref $_[0] eq 'ARRAY' ? shift : undef;
+    $self->connect($_[0], $_[1], $method ? { method => $method } : {});
+}
+
+sub on {
+    $_[0]->connect($_[2], $_[3], { method => $_[1] });
+}
+
 sub match {
     my($self, $env) = @_;
 
