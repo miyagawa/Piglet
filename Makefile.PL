@@ -5,6 +5,7 @@ requires 'Plack', 0.99;
 requires 'Router::Simple', 0.03;
 requires 'Data::Section::Simple';
 requires 'Sub::Exporter';
+requires 'parent';
 build_requires 'Test::More', 0.88;
 tests_recursive;
 test_requires 'Test::Requires';

@@ -63,8 +63,10 @@ MOTIVATIONS
     Because it's built on top of PSGI, it's easy to later migrate or upgrade
     to more featureful *real web frameworks* such as Catalyst or Jifty.
 
-    Read more about the idea of framework-less WSGI web application on <Ian
-    Bicking's blog post> which is an inspiration for this project.
+    Read more about the idea of framework-less WSGI web application on Ian
+    Bicking's blog post
+    <http://blog.ianbicking.org/2010/03/12/a-webob-app-example/> which is an
+    inspiration for this project.
 
 AUTHOR
     Tatsuhiko Miyagawa

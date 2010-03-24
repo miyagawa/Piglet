@@ -1,5 +1,6 @@
 package Piglet::Routes;
 use strict;
+use warnings;
 use Carp ();
 use Encode ();
 use Router::Simple;
