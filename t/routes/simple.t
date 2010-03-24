@@ -12,6 +12,7 @@ sub env {
 
 my $r = Piglet::Routes->new;
 $r->connect("/users/list", { controller => "Users", action => "list" });
+$r->connect("/app/new_user", { controller => "NewUser" }, { method => "POST" });
 $r->connect("/{user:[a-z0-9_]+}", { controller => "Profile" });
 $r->connect("/admin/{path_info:.*}", { app => "Admin" });
 $r->connect("/wiki/{page}", { controller => "Wiki" });
@@ -51,6 +52,12 @@ $r->connect("/wiki/{page}", { controller => "Wiki" });
 
     my $m = $r->match($env);
     is_deeply $m, { controller => "Wiki", page => "メイン" };
+}
+
+{
+    my $env = env "/app/new_user";
+    my $m = $r->match($env);
+    is $m, undef;
 }
 
 done_testing;

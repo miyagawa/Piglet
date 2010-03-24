@@ -102,3 +102,10 @@ Piglet::Decorator - Turns subs into PSGI application
   # throws an exception that has ->code and optionally ->message
   sub { HTTP::Exception::NOT_FOUND->throw }
 
+=head1 SEE ALSO
+
+L<Piglet>
+
+=cut
+
+

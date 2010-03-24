@@ -21,7 +21,8 @@ sub submapper { shift->{rs}->submapper(@_) }
 sub match {
     my($self, $env) = @_;
 
-    my($match, $route) = $self->{rs}->routematch($env) or return;
+    my($match, $route) = $self->{rs}->routematch($env);
+    return unless $match;
 
     # magic path_info
     if (exists $match->{path_info}) {
