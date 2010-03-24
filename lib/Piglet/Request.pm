@@ -9,5 +9,10 @@ sub new_response {
     Piglet::Response->new(@_);
 }
 
+sub args {
+    my $self = shift;
+    $self->env->{'piglet.routing_args'};
+}
+
 1;
 
