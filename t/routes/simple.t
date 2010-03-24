@@ -1,7 +1,6 @@
 use strict;
 use Piglet::Routes;
 use Test::More;
-use utf8;
 
 use HTTP::Message::PSGI;
 use HTTP::Request::Common;
@@ -51,7 +50,7 @@ $r->connect("/wiki/{page}", { controller => "Wiki" });
     my $env = env "/wiki/%E3%83%A1%E3%82%A4%E3%83%B3";
 
     my $m = $r->match($env);
-    is_deeply $m, { controller => "Wiki", page => "メイン" };
+    is_deeply $m, { controller => "Wiki", page => "\x{30e1}\x{30a4}\x{30f3}" };
 }
 
 {
