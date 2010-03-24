@@ -21,27 +21,30 @@ sub submapper { shift->{rs}->submapper(@_) }
 sub match {
     my($self, $env) = @_;
 
-    my $m = $self->{rs}->match($env) or return;
+    my($match, $route) = $self->{rs}->routematch($env) or return;
 
     # magic path_info
-    if (exists $m->{path_info}) {
-        if ($env->{PATH_INFO} =~ s!^(.*?)(/?)\Q$m->{path_info}\E$!!) {
+    if (exists $match->{path_info}) {
+        if ($env->{PATH_INFO} =~ s!^(.*?)(/?)\Q$match->{path_info}\E$!!) {
             $env->{SCRIPT_NAME} .= $1;
-            $env->{PATH_INFO}    = $2 . $m->{path_info};
+            $env->{PATH_INFO}    = $2 . $match->{path_info};
         } else {
-            Carp::carp("Path '$env->{PATH_INFO}' does not end with path_info: '$m->{path_info}'");
+            Carp::carp("Path '$env->{PATH_INFO}' does not end with path_info: '$match->{path_info}'");
         }
     }
 
     if ($self->{encoding}) {
-        for my $k (keys %$m) {
-            if ($m->{$k} =~ /[^[:ascii:]]/) {
-                $m->{$k} = Encode::decode($self->{encoding}, $m->{$k});
+        for my $k (keys %$match) {
+            if ($match->{$k} =~ /[^[:ascii:]]/) {
+                $match->{$k} = Encode::decode($self->{encoding}, $match->{$k});
             }
         }
     }
 
-    return $m;
+    $env->{'piglet.routing_args'}  = $match;
+    $env->{'piglet.routing_route'} = $route;
+
+    return $match;
 }
 
 1;

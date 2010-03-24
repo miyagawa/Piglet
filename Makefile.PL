@@ -2,7 +2,7 @@ use inc::Module::Install;
 all_from 'lib/Piglet.pm';
 readme_from('lib/Piglet.pm');
 requires 'Plack', 0.99;
-requires 'Router::Simple', 0.03;
+requires 'Router::Simple', 0.05;
 requires 'Data::Section::Simple';
 requires 'Sub::Exporter';
 requires 'parent';
